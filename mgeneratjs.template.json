@@ -1,0 +1,116 @@
+{
+  "_id": "$objectid",
+  "in_service": {
+      "$date": {
+          "min": "2020-01-01",
+          "max": "2024-01-01"
+      }
+  },
+  "computer": {
+      "make": {
+          "$choose": {
+              "from": [
+                  "CompuMor",
+                  "NumCrunch",
+                  "DeepThunk"
+              ],
+              "weights": [
+                  6,
+                  12,
+                  2
+              ]
+          }
+      },
+      "model": {
+          "$choose": {
+              "from": [
+                  "delta",
+                  "iota",
+                  "psi",
+                  "theta",
+                  "omega"
+              ]
+          }
+      }
+  },
+  "network": {
+      "ipv4": "$ip",
+      "ipv6": "$ipv6",
+      "mac": {
+          "$choose": {
+              "from": [
+                  {
+                      "$join": {
+                          "array": [
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              },
+                              ":",
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              },
+                              ":",
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              },
+                              ":",
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              },
+                              ":",
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              },
+                              ":",
+                              {
+                                  "$string": {
+                                      "length": 2,
+                                      "pool": "ABCDEF0123456789"
+                                  }
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "$word": {
+                          "syllables": 7
+                      }
+                  }
+              ],
+              "weights": [
+                  100,
+                  2
+              ]
+          }
+      }
+  },
+  "status": {
+      "$choose": {
+          "from": [
+              "active",
+              "repair",
+              "planned"
+          ],
+          "weights": [
+              100,
+              1,
+              2
+          ]
+      }
+  }
+}
